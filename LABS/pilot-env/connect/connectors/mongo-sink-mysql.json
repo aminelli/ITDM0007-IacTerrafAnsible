@@ -1,0 +1,19 @@
+{
+  "name": "mongo-sink-data-ingest-ordini-mysql",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "tasks.max": "1",
+    "topics": "ordini-mysql",
+    "connection.uri": "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/?authSource=admin",
+    "database": "${MONGO_DATABASE}",
+    "collection": "data-ingest-ordini-mysql",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "transforms": "keyToId",
+    "transforms.keyToId.type": "org.apache.kafka.connect.transforms.HoistField$Key",
+    "transforms.keyToId.field": "_id",
+    "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.ProvidedInKeyStrategy",
+    "writemodel.strategy": "com.mongodb.kafka.connect.sink.writemodel.strategy.ReplaceOneDefaultStrategy"
+  }
+}
