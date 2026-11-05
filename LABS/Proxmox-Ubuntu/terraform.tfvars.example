@@ -1,0 +1,41 @@
+proxmox_endpoint       = "https://REPLACE_WITH_PROXMOX_HOST:8006/"
+proxmox_ssh_username   = "REPLACE_WITH_NODE_SSH_USER"
+application_guest_username = "ubuntu"
+database_guest_username    = "ubuntu"
+ssh_allowed_cidr       = "REPLACE_WITH_TRUSTED_IPV4_CIDR"
+
+application_vm = {
+  node_name             = "REPLACE_WITH_NODE"
+  vm_id                 = 201
+  disk_datastore_id     = "REPLACE_WITH_DISK_STORAGE"
+  image_datastore_id    = "REPLACE_WITH_IMPORT_STORAGE"
+  cloud_init_datastore  = "REPLACE_WITH_CLOUD_INIT_STORAGE"
+  snippets_datastore_id = "REPLACE_WITH_SNIPPETS_STORAGE"
+  bridge                = "REPLACE_WITH_BRIDGE"
+  ipv4_address          = "dhcp"
+  ipv4_gateway          = ""
+  dns_servers           = []
+  hostname              = "app-vm"
+  certificate_names     = ["app.example.invalid"]
+}
+
+database_vm = {
+  node_name                   = "REPLACE_WITH_NODE"
+  vm_id                       = 202
+  disk_datastore_id           = "REPLACE_WITH_DISK_STORAGE"
+  image_datastore_id          = "REPLACE_WITH_IMPORT_STORAGE"
+  cloud_init_datastore        = "REPLACE_WITH_CLOUD_INIT_STORAGE"
+  snippets_datastore_id       = "REPLACE_WITH_SNIPPETS_STORAGE"
+  bridge                      = "REPLACE_WITH_BRIDGE"
+  ipv4_address                = "dhcp"
+  ipv4_gateway                = ""
+  dns_servers                 = []
+  hostname                    = "db-vm"
+  application_source_cidr     = "REPLACE_WITH_APPLICATION_VM_CIDR"
+}
+
+# Set secrets in the shell environment, not in this file:
+# TF_VAR_proxmox_api_token
+# TF_VAR_proxmox_ssh_password
+# TF_VAR_application_guest_password
+# TF_VAR_database_guest_password

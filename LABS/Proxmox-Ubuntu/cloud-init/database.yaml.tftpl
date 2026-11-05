@@ -1,0 +1,41 @@
+#cloud-config
+ssh_pwauth: true
+package_update: true
+
+write_files:
+  - path: /etc/mysql/mariadb.conf.d/60-bind-address.cnf
+    owner: root:root
+    permissions: "0644"
+    content: |
+      [mysqld]
+      bind-address = 0.0.0.0
+
+runcmd:
+  - |
+    set -euxo pipefail
+
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get install -y --no-install-recommends ca-certificates curl qemu-guest-agent
+
+    curl -fsSLo /usr/local/sbin/mariadb_repo_setup \
+      https://r.mariadb.com/downloads/mariadb_repo_setup
+    echo "b54c87edfe81b9837ef44a4a4f39383dd8df32776e6a18c0743a5d3ece044ac3  /usr/local/sbin/mariadb_repo_setup" \
+      | sha256sum --check -
+    chmod 0755 /usr/local/sbin/mariadb_repo_setup
+    /usr/local/sbin/mariadb_repo_setup \
+      --mariadb-server-version=mariadb-12.3 \
+      --os-type=ubuntu \
+      --os-version=resolute \
+      --skip-maxscale
+
+    apt-get update
+    apt-get install -y mariadb-server ufw
+    mariadb --version | grep -Eq 'Distrib 12\.3\.'
+    systemctl enable --now mariadb
+    systemctl enable --now qemu-guest-agent
+
+    ufw default deny incoming
+    ufw default allow outgoing
+    ufw allow from ${ssh_allowed_cidr} to any port 22 proto tcp
+    ufw allow from ${application_source_cidr} to any port 3306 proto tcp
+    ufw --force enable

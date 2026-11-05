@@ -1,0 +1,77 @@
+#cloud-config
+ssh_pwauth: true
+package_update: true
+
+write_files:
+  - path: /etc/nginx/conf.d/tomcat-proxy.conf
+    owner: root:root
+    permissions: "0644"
+    content: |
+      server {
+        listen 80;
+        server_name ${application_server_names};
+        return 301 https://$host$request_uri;
+      }
+
+      server {
+        listen 443 ssl;
+        server_name ${application_server_names};
+
+        ssl_certificate /etc/nginx/ssl/tomcat-proxy.crt;
+        ssl_certificate_key /etc/nginx/ssl/tomcat-proxy.key;
+        ssl_protocols TLSv1.2 TLSv1.3;
+
+        location / {
+          proxy_pass http://127.0.0.1:8080;
+          proxy_http_version 1.1;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto https;
+        }
+      }
+
+runcmd:
+  - |
+    set -euxo pipefail
+
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get install -y --no-install-recommends \
+      ca-certificates curl gnupg openssl ufw \
+      openjdk-21-jre-headless tomcat10 qemu-guest-agent
+
+    curl -fsSL https://nginx.org/keys/nginx_signing.key \
+      -o /tmp/nginx_signing.key
+    gpg --dearmor --yes -o /usr/share/keyrings/nginx-archive-keyring.gpg /tmp/nginx_signing.key
+    nginx_fingerprint="$(gpg --show-keys --with-colons /usr/share/keyrings/nginx-archive-keyring.gpg | awk -F: '$1 == "fpr" { print $10; exit }')"
+    test "$nginx_fingerprint" = "573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62"
+
+    printf 'deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] https://nginx.org/packages/ubuntu resolute nginx\n' \
+      > /etc/apt/sources.list.d/nginx.list
+    printf 'Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n' \
+      > /etc/apt/preferences.d/99nginx
+
+    apt-get update
+    apt-get install -y nginx
+    nginx -v 2>&1 | grep -Eq '^nginx/1\.30\.'
+
+    install -d -m 0700 /etc/nginx/ssl
+    openssl req -x509 -nodes -days 365 -newkey rsa:3072 \
+      -keyout /etc/nginx/ssl/tomcat-proxy.key \
+      -out /etc/nginx/ssl/tomcat-proxy.crt \
+      -subj "/CN=${certificate_subject}" \
+      -addext "subjectAltName=${certificate_san_extension}"
+    chmod 0600 /etc/nginx/ssl/tomcat-proxy.key
+    rm -f /etc/nginx/conf.d/default.conf /etc/nginx/sites-enabled/default
+
+    systemctl enable --now tomcat10
+    systemctl enable --now qemu-guest-agent
+    nginx -t
+    systemctl enable --now nginx
+
+    ufw default deny incoming
+    ufw default allow outgoing
+    ufw allow from ${ssh_allowed_cidr} to any port 22 proto tcp
+    ufw allow 80/tcp
+    ufw allow 443/tcp
+    ufw --force enable
