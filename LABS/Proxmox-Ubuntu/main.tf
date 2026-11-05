@@ -1,6 +1,4 @@
 locals {
-  ubuntu_image_url         = "https://cloud-images.ubuntu.com/releases/resolute/release/ubuntu-26.04-server-cloudimg-amd64.img"
-  ubuntu_image_sha256      = "5645d0318ad21f643ebb1ac4567514620e9893380b07b0201fda163baa5b7eb5"
   application_server_names = join(" ", var.application_vm.certificate_names)
   certificate_subject      = var.application_vm.certificate_names[0]
   certificate_san_extension = join(",", [
@@ -9,24 +7,28 @@ locals {
   ])
 }
 
-resource "proxmox_download_file" "application_ubuntu_image" {
-  content_type       = "import"
-  datastore_id       = var.application_vm.image_datastore_id
-  file_name          = "ubuntu-26.04-application-cloudimg-amd64.qcow2"
-  node_name          = var.application_vm.node_name
-  url                = local.ubuntu_image_url
-  checksum           = local.ubuntu_image_sha256
-  checksum_algorithm = "sha256"
+resource "proxmox_virtual_environment_file" "application_image" {
+  content_type = "import"
+  datastore_id = var.application_vm.image_datastore_id
+  node_name    = var.application_vm.node_name
+
+  source_file {
+    path      = var.packer_image_path
+    file_name = "ubuntu-26.04-application.qcow2"
+    checksum  = filesha256(var.packer_image_path)
+  }
 }
 
-resource "proxmox_download_file" "database_ubuntu_image" {
-  content_type       = "import"
-  datastore_id       = var.database_vm.image_datastore_id
-  file_name          = "ubuntu-26.04-database-cloudimg-amd64.qcow2"
-  node_name          = var.database_vm.node_name
-  url                = local.ubuntu_image_url
-  checksum           = local.ubuntu_image_sha256
-  checksum_algorithm = "sha256"
+resource "proxmox_virtual_environment_file" "database_image" {
+  content_type = "import"
+  datastore_id = var.database_vm.image_datastore_id
+  node_name    = var.database_vm.node_name
+
+  source_file {
+    path      = var.packer_image_path
+    file_name = "ubuntu-26.04-database.qcow2"
+    checksum  = filesha256(var.packer_image_path)
+  }
 }
 
 resource "proxmox_virtual_environment_file" "application_cloud_config" {
@@ -67,7 +69,7 @@ resource "proxmox_virtual_environment_vm" "application" {
   tags        = ["terraform", "ubuntu", "application"]
 
   agent {
-    enabled = false
+    enabled = true
   }
 
   cpu {
@@ -80,7 +82,7 @@ resource "proxmox_virtual_environment_vm" "application" {
 
   disk {
     datastore_id = var.application_vm.disk_datastore_id
-    import_from  = proxmox_download_file.application_ubuntu_image.id
+    import_from  = proxmox_virtual_environment_file.application_image.id
     interface    = "scsi0"
     size         = 20
   }
@@ -139,7 +141,7 @@ resource "proxmox_virtual_environment_vm" "database" {
   }
 
   agent {
-    enabled = false
+    enabled = true
   }
 
   cpu {
@@ -152,7 +154,7 @@ resource "proxmox_virtual_environment_vm" "database" {
 
   disk {
     datastore_id = var.database_vm.disk_datastore_id
-    import_from  = proxmox_download_file.database_ubuntu_image.id
+    import_from  = proxmox_virtual_environment_file.database_image.id
     interface    = "scsi0"
     size         = 20
   }

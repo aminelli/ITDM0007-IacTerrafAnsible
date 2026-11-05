@@ -1,7 +1,11 @@
 .terraform/
+.packer/
+packer/packer_cache/
+packer/output/
 *.tfstate
 *.tfstate.*
 *.tfvars
+*.pkrvars.hcl
 *.tfplan
 crash.log
 crash.*.log

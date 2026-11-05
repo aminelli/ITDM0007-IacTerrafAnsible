@@ -25,6 +25,11 @@ variable "proxmox_ssh_password" {
   sensitive   = true
 }
 
+variable "packer_image_path" {
+  description = "Local path to the QCOW2 image produced by Packer."
+  type        = string
+}
+
 variable "application_guest_username" {
   description = "Administrative Linux account created on the application VM."
   type        = string
@@ -62,8 +67,8 @@ variable "application_vm" {
   type = object({
     node_name             = string
     vm_id                 = number
-    disk_datastore_id     = string
     image_datastore_id    = string
+    disk_datastore_id     = string
     cloud_init_datastore  = string
     snippets_datastore_id = string
     bridge                = string
@@ -106,8 +111,8 @@ variable "database_vm" {
   type = object({
     node_name               = string
     vm_id                   = number
-    disk_datastore_id       = string
     image_datastore_id      = string
+    disk_datastore_id       = string
     cloud_init_datastore    = string
     snippets_datastore_id   = string
     bridge                  = string
