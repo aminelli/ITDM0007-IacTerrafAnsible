@@ -1,0 +1,122 @@
+{
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev",
+		"resource_type": "azurerm_resource_group",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Compute/virtualMachines/vm-db01-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Compute/virtualMachines/vm-db01-dev",
+		"resource_type": "azurerm_linux_virtual_machine",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Compute/virtualMachines/vm-web01-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Compute/virtualMachines/vm-web01-dev",
+		"resource_type": "azurerm_linux_virtual_machine",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Compute/virtualMachines/vm-web02-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Compute/virtualMachines/vm-web02-dev",
+		"resource_type": "azurerm_linux_virtual_machine",
+		"resource_name": "res-3"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkInterfaces/nic-vm-db01-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkInterfaces/nic-vm-db01-dev",
+		"resource_type": "azurerm_network_interface",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkInterfaces/nic-vm-web01-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkInterfaces/nic-vm-web01-dev",
+		"resource_type": "azurerm_network_interface",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkInterfaces/nic-vm-web02-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkInterfaces/nic-vm-web02-dev",
+		"resource_type": "azurerm_network_interface",
+		"resource_name": "res-3"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-app": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-app",
+		"resource_type": "azurerm_network_security_group",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-app/securityRules/Allow-SSH-Inbound": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-app/securityRules/Allow-SSH-Inbound",
+		"resource_type": "azurerm_network_security_rule",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-data": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-data",
+		"resource_type": "azurerm_network_security_group",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-data/securityRules/Allow-SSH-Inbound": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/networkSecurityGroups/nsg-data/securityRules/Allow-SSH-Inbound",
+		"resource_type": "azurerm_network_security_rule",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/publicIPAddresses/pip-vm-db01-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/publicIPAddresses/pip-vm-db01-dev",
+		"resource_type": "azurerm_public_ip",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/publicIPAddresses/pip-vm-web01-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/publicIPAddresses/pip-vm-web01-dev",
+		"resource_type": "azurerm_public_ip",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/publicIPAddresses/pip-vm-web02-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/publicIPAddresses/pip-vm-web02-dev",
+		"resource_type": "azurerm_public_ip",
+		"resource_name": "res-3"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev",
+		"resource_type": "azurerm_virtual_network",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-app": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-app",
+		"resource_type": "azurerm_subnet",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-app/networkSecurityGroups/L3N1YnNjcmlwdGlvbnMvODg1NWIyMmEtNjQwYS00MWRiLWJkYzUtYjQyM2NiM2U4ZmViL3Jlc291cmNlR3JvdXBzL3JnLWRlbW8tZGV2L3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay9uZXR3b3JrU2VjdXJpdHlHcm91cHMvbnNnLWFwcA==": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-app",
+		"resource_type": "azurerm_subnet_network_security_group_association",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-data": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-data",
+		"resource_type": "azurerm_subnet",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-data/networkSecurityGroups/L3N1YnNjcmlwdGlvbnMvODg1NWIyMmEtNjQwYS00MWRiLWJkYzUtYjQyM2NiM2U4ZmViL3Jlc291cmNlR3JvdXBzL3JnLWRlbW8tZGV2L3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay9uZXR3b3JrU2VjdXJpdHlHcm91cHMvbnNnLWRhdGE=": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Network/virtualNetworks/vnet-demo-dev/subnets/snet-data",
+		"resource_type": "azurerm_subnet_network_security_group_association",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc",
+		"resource_type": "azurerm_storage_account",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/blobServices/default/containers/backups": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/blobServices/default/containers/backups",
+		"resource_type": "azurerm_storage_container",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/blobServices/default/containers/logs": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/blobServices/default/containers/logs",
+		"resource_type": "azurerm_storage_container",
+		"resource_name": "res-2"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/queueServices/default": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc",
+		"resource_type": "azurerm_storage_account_queue_properties",
+		"resource_name": "res-1"
+	},
+	"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/tableServices/default": {
+		"resource_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc",
+		"resource_type": "azurerm_storage_account_table_properties",
+		"resource_name": "res-1"
+	}
+}

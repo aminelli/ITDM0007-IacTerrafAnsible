@@ -1,0 +1,4 @@
+Following resources are marked to be skipped:
+
+- /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/blobServices/default
+- /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-demo-dev/providers/Microsoft.Storage/storageAccounts/stdemodevrzouc/fileServices/default
