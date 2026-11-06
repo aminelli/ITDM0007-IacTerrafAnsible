@@ -1,0 +1,20 @@
+#cloud-config
+package_update: true
+packages:
+  - openjdk-21-jdk-headless
+  - tomcat10
+
+write_files:
+  - path: /etc/systemd/system/tomcat10.service.d/override.conf
+    owner: root:root
+    permissions: "0644"
+    content: |
+      [Service]
+      Environment="JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64"
+
+runcmd:
+  - [systemctl, daemon-reload]
+  - [bash, -lc, "grep -Eq '<Connector[^>]*port=\"8080\"' /etc/tomcat10/server.xml"]
+  - [systemctl, enable, --now, tomcat10.service]
+  - [systemctl, is-active, --quiet, tomcat10.service]
+  - [bash, -lc, "java -version 2>&1 | grep -q '21\\.'"]

@@ -1,0 +1,26 @@
+resource_group_name = "rg-tomcat-northeurope"
+location            = "northeurope"
+vm_name             = "vm-tomcat-northeurope"
+vm_size             = "Standard_B2s"
+admin_username      = "azureadmin"
+
+# Public SSH with password authentication was explicitly confirmed.
+# This permits login attempts from any IPv4 address; restrict to a trusted CIDR when possible.
+ssh_source_cidr = "0.0.0.0/0"
+
+# Public Tomcat access was explicitly requested.
+tomcat_source_cidr = "0.0.0.0/0"
+
+vnet_address_space                = ["10.0.0.0/16"]
+subnet_address_prefixes           = ["10.0.1.0/24"]
+os_disk_storage_account_type      = "Standard_LRS"
+ubuntu_publisher                  = "Canonical"
+ubuntu_offer                      = "ubuntu-26_04-lts"
+ubuntu_sku                        = "server"
+ubuntu_image_version              = "latest"
+
+common_tags = {
+  Environment = "Development"
+  Project     = "Tomcat"
+  ManagedBy   = "Terraform"
+}
