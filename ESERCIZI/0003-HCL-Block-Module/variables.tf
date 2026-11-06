@@ -39,11 +39,15 @@ variable "subnets" {
 
 variable "vms" {
   description = "VM da creare: una chiamata al modulo per ciascuna"
-  type = map(object({
-    size   = string
-    subnet = string
-    enable_public_ip = optional(bool, true)
-  }))
+  type = map(
+    object(
+      {
+        size   = string
+        subnet = string
+        enable_public_ip = optional(bool, true)
+      }
+    )
+  )
   default = {
     web01 = { size = "Standard_B2s", subnet = "app" }
     web02 = { size = "Standard_B2s", subnet = "app" }
